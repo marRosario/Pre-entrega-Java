@@ -1,0 +1,13 @@
+# Ignorar archivos compilados
+*.class
+
+# Ignorar carpetas de compilación
+bin/
+out/
+build/
+
+# Ignorar configuraciones del editor
+.vscode/
+.idea/
+
+
