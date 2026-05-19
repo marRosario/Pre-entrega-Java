@@ -18,10 +18,10 @@ public class Pedido {
 
     public void agregarLinea(Producto producto, int cantidad) {
         lineas.add(new LineaPedido(producto, cantidad));
-        producto.setStock(producto.getStock() - cantidad); // descontar stock
+        producto.setStock(producto.getStock() - cantidad); 
     }
 
-    // 👇 Método que faltaba
+    
     public double getTotal() {
         double total = 0;
         for (LineaPedido linea : lineas) {
