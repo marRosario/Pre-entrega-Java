@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ecommerce.model.LineaPedido;
+
 import ecommerce.model.Pedido;
 import ecommerce.model.Producto;
 
