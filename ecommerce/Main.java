@@ -3,28 +3,40 @@ package ecommerce;
 import ecommerce.exception.ProductoNoEncontradoException;
 import ecommerce.exception.StockInsuficienteException;
 import ecommerce.service.ProductoService;
+import ecommerce.service.PedidoService;
 import ecommerce.ui.MenuProducto;
-
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] argumentos) {
         // Crear dependencias
-        ProductoService service = new ProductoService();
+        ProductoService productoService = new ProductoService();
+        PedidoService pedidoService = new PedidoService();
         Scanner sc = new Scanner(System.in);
-        MenuProducto menu = new MenuProducto(sc, service);
 
+        MenuProducto menuProducto = new MenuProducto(sc, productoService);
+       
         int opcion;
         do {
-            menu.mostrarMenu();
+            System.out.println("-----MENU PRINCIPAL-----");
+            System.out.println("1. Menu productos");
+            System.out.println("2. Listar productos");
+            System.out.println("3. Vender producto");
+            System.out.println("4. Eliminar producto");
+            System.out.println("5. Crear pedido");
+            System.out.println("6. Listar pedidos");
+            System.out.println("0. Salir");
+            System.out.print("Opcion: ");
             opcion = sc.nextInt();
-
+            sc.nextLine(); 
             try {
                 switch (opcion) {
-                    case 1 -> menu.agregarProducto();
-                    case 2 -> service.listarProductos();
-                    case 3 -> menu.venderProducto();
-                    case 4 -> menu.eliminarProducto();
+                    case 1 -> menuProducto.agregarProducto();
+                    case 2 -> productoService.listarProductos();
+                    case 3 -> menuProducto.venderProducto();
+                    case 4 -> menuProducto.eliminarProducto();
+                    case 5 -> pedidoService.crearPedido(productoService, sc);
+                    case 6 -> pedidoService.listarPedidos();
                     case 0 -> System.out.println("...Salir del menú...");
                     default -> System.out.println("Opción inválida...");
                 }
@@ -36,7 +48,7 @@ public class Main {
                 System.out.println("Dato inválido: " + e.getMessage());
             }
 
-            System.out.println(); // línea en blanco entre operaciones
+            System.out.println(); 
         } while (opcion != 0);
 
         sc.close();

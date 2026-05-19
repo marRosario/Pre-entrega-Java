@@ -16,7 +16,7 @@ public class ProductoService {
     public Producto eliminarProducto(String nombre) throws ProductoNoEncontradoException {
         Producto p = buscarPorNombre(nombre);
         if (p == null) {
-            throw new ProductoNoEncontradoException("No se encontró el producto  " + nombre);
+            throw new ProductoNoEncontradoException("No se encontró el producto " + nombre);
         }
         productos.remove(p);
         System.out.println("Producto eliminado: " + p);
@@ -32,48 +32,43 @@ public class ProductoService {
         return null;
     }
 
-public double venderProducto(String nombre, int cantidad) throws StockInsuficienteException {
-    Producto producto = buscarPorNombre(nombre);
+    public double venderProducto(String nombre, int cantidad) throws StockInsuficienteException {
+        Producto producto = buscarPorNombre(nombre);
 
-    if(producto==null){
-        throw new ProductoNoEncontradoException("El producto no existe:" + nombre);
+        if (producto == null) {
+            throw new ProductoNoEncontradoException("El producto no existe: " + nombre);
+        }
+        if (producto.getStock() < cantidad) {
+            throw new StockInsuficienteException("Stock insuficiente para " + producto.getNombre());
+        }
 
+        double totalVenta = producto.getPrecio() * cantidad;
+
+        if (totalVenta > 10000) {
+            double descuento = totalVenta * 0.15;
+            totalVenta -= descuento;
+            System.out.println("Se aplicó un descuento del 15%. Total con descuento: $ " + totalVenta);
+        }
+        producto.setStock(producto.getStock() - cantidad);
+        return totalVenta;
     }
-    if (producto.getStock() < cantidad) {
-        throw new StockInsuficienteException("Stock insuficiente para " + producto.getNombre());
-    }
-
-    double totalVenta=producto.getPrecio()*cantidad;
-
-    if(totalVenta>10000){
-        double descuento=totalVenta*0.15;
-        totalVenta-=descuento;
-        System.out.println("Se aplico un descuento del 15%. Total con descuento: $ " +totalVenta);
-    
-    }
-    producto.setStock(producto.getStock() - cantidad);
-    return totalVenta;
-}
-
 
     public void listarProductos() {
         if (productos.isEmpty()) {
             System.out.println("No hay productos cargados.");
         } else {
-            for(Producto p :productos){
+            for (Producto p : productos) {
                 System.out.println(p);
             }
+        }
+    }
+
+    public Producto buscarPorNombre(String nombre) {
+        for (Producto p : productos) {
+            if (p.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return p;
             }
         }
-
-        public Producto buscarPorNombre(String nombre){
-            return productos.stream()
-            .filter(p-> p.getNombre().trim().equalsIgnoreCase(nombre.trim()))
-            .findFirst()
-            .orElseThrow(()->new ProductoNoEncontradoException("Producto con nombre: " + nombre + " no encontrado "));
-        
+        return null;
     }
 }
-
-
-

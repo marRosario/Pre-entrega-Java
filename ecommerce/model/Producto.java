@@ -12,7 +12,7 @@ public class Producto {
 public Producto (String nombre, double precio, int stock, String categoria){
 
     this.id= contador++;
-    this.nombre=nombre;
+    this.nombre=nombre.trim();
     this.precio=precio;
     this.stock=stock;
     this.categoria=categoria;

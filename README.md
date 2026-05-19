@@ -12,6 +12,8 @@ Incluye operaciones básicas de inventario y manejo de excepciones personalizada
 - [Eliminar productos] del inventario con detalles de stock mostrados en la consola.
 - [Vender productos] y actualizar el stock.
 - Aplicar un **descuento del 15%** si la venta supera los $10.000.
+- [Crear pedidos] con múltiples líneas de productos.
+- [Listar pedidos] mostrando detalle de cada línea y total
 - Manejo de excepciones personalizadas:
   - `ProductoNoEncontradoException`
   - `StockInsuficienteException`
@@ -21,21 +23,25 @@ Incluye operaciones básicas de inventario y manejo de excepciones personalizada
 ## 📂 Estructura del proyecto
 
 TECHLAB/
- ├── ecommerce/
- │    ├── exception/ → Excepciones personalizadas
- │    │    ├── ProductoNoEncontradoException.java
- │    │    └── StockInsuficienteException.java
- │    ├── model/ 
- │    │    └── Producto.java
- │    ├── service/ → Lógica de negocio
- │    │    └── ProductoService.java
- │    ├── ui/ → Interfaz de consola
- │    │    └── MenuProducto.java
- │    └── util/ → Utilidades
- │         └── Validador.java
- ├── Main.java → Punto de entrada del programa
- ├── .gitignore
- └── README.md
+├── ecommerce/
+│    ├── exception/   → Excepciones personalizadas
+│    │    ├── ProductoNoEncontradoException.java
+│    │    └── StockInsuficienteException.java
+│    ├── model/       → Clases de dominio
+│    │    ├── Producto.java
+│    │    ├── Pedido.java
+│    │    └── LineaPedido.java
+│    ├── service/     → Lógica de negocio
+│    │    ├── ProductoService.java
+│    │    └── PedidoService.java
+│    ├── ui/          → Interfaz de consola
+│    │    ├── MenuProducto.java
+│    │    └── MenuPedido.java
+│    └── util/        → Utilidades
+│         └── Validador.java
+├── Main.java    → Punto de entrada del programa
+├── .gitignore
+└── README.md
 
 ## 🧪 Cómo probar el funcionamiento
 

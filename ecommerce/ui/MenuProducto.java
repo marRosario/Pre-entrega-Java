@@ -21,6 +21,8 @@ this.service=service;
             System.out.println("2. Listar productos");
             System.out.println("3. Vender producto");
             System.out.println("4. Eliminar producto");
+            System.out.println("5. Crear pedido");
+            System.out.println("6. Listar pedidos");
             System.out.println("0. Salir ");
             System.out.print("Opcion: ");
         
@@ -31,10 +33,9 @@ this.service=service;
     public void agregarProducto() {
         String continuar;
         do {
-            sc.nextLine(); // limpiar buffer
-
+           // sc.nextLine(); 
             System.out.println("Nombre:");
-            String nombre = sc.nextLine(); 
+            String nombre = sc.nextLine().trim(); 
 
             System.out.println("Precio:");
             double precio = sc.nextDouble();
@@ -56,7 +57,7 @@ this.service=service;
             System.out.println(" *Producto agregado correctamente");
 
             System.out.println("¿Desea agregar otro producto? (s/n):");
-            continuar = sc.next();
+            continuar = sc.nextLine().trim();
         } while (continuar.equalsIgnoreCase("s"));
     }
 
@@ -64,7 +65,7 @@ this.service=service;
         String continuar;
         
         do{
-        sc.nextLine(); // limpiar buffer
+        
         System.out.println("Nombre del producto a vender:");
         String nombre = sc.nextLine();
 
@@ -83,7 +84,7 @@ try{
     System.out.println(e.getMessage());
 }
 System.out.println("¿Desea vender otro producto? (s/n):");
-        continuar= sc.next();
+        continuar= sc.nextLine().trim();
         }while(continuar.equalsIgnoreCase("s"));
     }
 
@@ -91,9 +92,9 @@ System.out.println("¿Desea vender otro producto? (s/n):");
         String continuar;
         do{
         
-        sc.nextLine();
+       
         System.out.println("Nombre del producto a eliminar:");
-        String nombre= sc.nextLine();
+        String nombre= sc.nextLine().trim();
 
         Producto eliminado = service.eliminarProducto(nombre);
 
@@ -103,7 +104,7 @@ System.out.println("¿Desea vender otro producto? (s/n):");
         System.out.println("Stock que tenia entes de eliminar: " + eliminado.getStock());
 
         System.out.println("¡Desea eliminar otro producto? (s/n):");
-         continuar=sc.next();
+         continuar=sc.nextLine().trim();
             }while (continuar.equalsIgnoreCase("s"));
      }
 }
